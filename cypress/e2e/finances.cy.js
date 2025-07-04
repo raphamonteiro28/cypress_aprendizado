@@ -35,13 +35,17 @@ it('Cadastrar uma saída', () => {
 
     it('Excluir transação', () => {
         criarTransacao("Freela", 100)
+        criarTransacao("Uber", 45)
 
-        cy.contains(".description", "Freela")
-            .parent()
-            .find('img')
-            .click()
+        cy.contains("tbody tr td.description", "Freela")
+        .siblings()
+        .find('img')
+        .click()
+
+        cy.get("tbody tr td.description").should("have.length", 1)
     });
 });
+
 
 function criarTransacao(descricao, valor) {
     cy.contains("Nova Transação").click()
